@@ -15,6 +15,22 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./paginas/login/login.module').then( m => m.LoginPageModule)
   },
+  {
+    path: 'profesorhome',
+    loadChildren: () => import('./paginas/profesorhome/profesorhome.module').then( m => m.ProfesorhomePageModule)
+  },
+  {
+    path: 'alumnohome',
+    loadChildren: () => import('./paginas/alumnohome/alumnohome.module').then( m => m.AlumnohomePageModule)
+  },
+  {
+    path: 'informacion-asignatura',
+    loadChildren: () => import('./paginas/informacion-asignatura/informacion-asignatura.module').then( m => m.InformacionAsignaturaPageModule)
+  },
+  {
+    path: 'qr',
+    loadChildren: () => import('./paginas/qr/qr.module').then( m => m.QrPageModule)
+  },
 
 ];
 

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { FirebaseService } from 'src/app/servicio/firebase.service';
+import { Usuario } from 'src/app/modelos/modelos';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -9,25 +12,50 @@ import { AlertController } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private menuController: MenuController,
-    private alertController: AlertController) { }
+  user: Usuario = new Usuario()
+  usuario = '';
+  contrasena = '';
+
+  constructor(
+    private menuController: MenuController,
+    private alertController: AlertController,
+    private fire: FirebaseService,
+    private router: Router ) { }
 
   ngOnInit() {
   }
+
   mostrarMenu() {
     this.menuController.open('first');
   }
 
 
   async Enviar() {
-    const alert = await this.alertController.create({
-      header: 'Ingreso correctamente',
-      message: 'Bienvenido a Duoc UC!',
-      buttons: ['OK'],
-    });
+    const usuario = await this.fire.obtenerUsuario(this.usuario);
+    if (usuario && usuario.contrasena === this.contrasena) {
+      // Mostrar alerta de éxito
+      await this.fire.setCurrentUser(usuario);
+      const alert = await this.alertController.create({
+        header: 'Ingreso correctamente',
+        message: 'Bienvenido a Duoc UC!',
+        buttons: ['OK']
+      });
+      await alert.present();
 
-    await alert.present();
-
-
+      // Redirigir basado en esProfesor
+      if (usuario.esProfesor) {
+        this.router.navigateByUrl('/profesorhome'); // Ruta de profesor
+      } else {
+        this.router.navigateByUrl('/alumnohome'); // Ruta de alumno
+      }
+    } else {
+      // Mostrar alerta de error
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Usuario o contraseña incorrectos',
+        buttons: ['OK']
+      });
+      await alert.present();
+    }
   }
 }
