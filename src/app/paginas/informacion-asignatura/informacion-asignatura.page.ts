@@ -33,7 +33,7 @@ export class InformacionAsignaturaPage implements OnInit {
   async crearAsistencia(){
     const uuid = await this.fire.crearAsistencia(this.asignatura)
     this.verDetalleAsignatura(uuid)
-    
+
   }
 
   verDetalleAsignatura(id_asistencia: string) {

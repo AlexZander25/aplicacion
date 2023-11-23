@@ -87,5 +87,25 @@ export class FirebaseService {
     return uuid; // Devuelve el UUID del nuevo registro de asistencia
   }
 
+  async alumnoPresente(idAsistencia: string, idUsuario: string): Promise<void> {
+    const attendanceRef = ref(this.db, `asistencia/${idAsistencia}`);
+    console.log("SERVICIO "+attendanceRef)
+    try {
+      const snapshot = await get(attendanceRef);
+      if (snapshot.exists()) {
+        const attendance = snapshot.val();
+        attendance.alumnos_presentes = attendance.alumnos_presentes || [];
+        if (!attendance.alumnos_presentes.includes(idUsuario)) {
+          attendance.alumnos_presentes.push(idUsuario);
+          await set(attendanceRef, attendance);
+        }
+      } else {
+        console.log('Attendance record not found');
+      }
+    } catch (error) {
+      console.error('Error updating attendance record:', error);
+      throw error;
+    }
+  }
 }
 
