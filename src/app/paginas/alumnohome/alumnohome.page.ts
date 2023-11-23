@@ -16,12 +16,12 @@ export class AlumnohomePage implements OnInit {
 
   lecturaQr?: string
   asignaturas: Asignatura[] = []; // Lista para almacenar las asignaturas
-  usuario : Usuario = new Usuario()
+  usuario: Usuario = new Usuario()
 
   constructor(
     private storage: Storage,
     private fire: FirebaseService,
-    private changeDetect: ChangeDetectorRef ) { }
+    private changeDetect: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.cargarDatosUsuario()
@@ -61,10 +61,10 @@ export class AlumnohomePage implements OnInit {
     const listener = await BarcodeScanner.addListener('barcodeScanned', async (result) => {
       if (result.barcode.displayValue) {
         this.lecturaQr = result.barcode.displayValue;
-        console.log("COMPONENTE "+"|",this.lecturaQr,"|") 
-        console.log("COMPONENTE "+this.usuario.rut) 
-        this.stopScan(); 
-        await this.fire.alumnoPresente(this.lecturaQr,this.usuario.rut)
+        console.log("COMPONENTE " + "|", this.lecturaQr, "|")
+        console.log("COMPONENTE " + this.usuario.rut)
+        this.stopScan();
+        await this.fire.alumnoPresente(this.lecturaQr, this.usuario.rut)
       }
     });
     await BarcodeScanner.startScan();

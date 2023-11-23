@@ -11,13 +11,13 @@
     </ion-toolbar>
   </ion-header>
   <p>Nombre del usuario: {{ usuario.nombre }}</p>
-  
+
   <ion-list>
     <ion-item *ngFor="let asignatura of asignaturas">
       <ion-label>
         {{ asignatura.nombre }}
-        {{ asignatura.codigo}}
-        {{ asignatura.profesor}}
+        {{ asignatura.codigo }}
+        {{ asignatura.profesor }}
       </ion-label>
     </ion-item>
   </ion-list>

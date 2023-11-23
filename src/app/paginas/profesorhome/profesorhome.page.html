@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>profehome</ion-title>
+    <ion-title>Bienvenido : {{ usuario.nombre }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,17 +10,17 @@
       <ion-title size="large">alumnohome</ion-title>
     </ion-toolbar>
   </ion-header>
-  <p>Nombre del usuario: {{ usuario.nombre }}</p>
-  
-  <ion-list>
-    <ion-item *ngFor="let asignatura of asignaturas" (click)="verDetalleAsignatura(asignatura.codigo)">
-      <ion-label>
-        {{ asignatura.nombre }}
-        {{ asignatura.codigo}}
-        {{ asignatura.profesor}}
 
+  <ion-card *ngFor="let asignatura of asignaturas" (click)="verDetalleAsignatura(asignatura.codigo)">
+    <img alt="Silhouette of mountains" src="\assets\img\Duoc.jpg" />
+    <ion-card-header>
+      <ion-card-title>{{ asignatura.nombre }}</ion-card-title>
+      <ion-card-subtitle>{{ asignatura.codigo}}</ion-card-subtitle>
+    </ion-card-header>
 
-      </ion-label>
-    </ion-item>
-  </ion-list>
+    <ion-card-content>
+      {{ asignatura.profesor}}
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
