@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>alumnohome</ion-title>
+    <ion-title>Asignaturas</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -10,18 +13,34 @@
       <ion-title size="large">alumnohome</ion-title>
     </ion-toolbar>
   </ion-header>
-  <p>Nombre del usuario: {{ usuario.nombre }}</p>
+  <img alt="Silhouette of mountains" src="\assets\img\2560px-Logo_DuocUC.svg.png" />
+  <p> Bienvenidio a Duoc UC: {{ usuario.nombre }}</p>
+  
+  
 
   <ion-list>
     <ion-item *ngFor="let asignatura of asignaturas">
-      <ion-label>
-        {{ asignatura.nombre }}
-        {{ asignatura.codigo }}
-        {{ asignatura.profesor }}
-      </ion-label>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ asignatura.nombre }}</ion-card-title>
+          <ion-card-subtitle>{{ asignatura.codigo }}</ion-card-subtitle>
+        </ion-card-header>
+      
+        <ion-card-content>
+          {{ asignatura.profesor }} <br>
+          Here's a small text description for the card content. Nothing more, nothing less.
+        </ion-card-content>
+      
+        <ion-button fill="clear">Notas</ion-button>
+        <ion-button fill="clear">Asistencia</ion-button>
+      </ion-card>
     </ion-item>
   </ion-list>
 
+
+  
+  
+  
   <ion-button (click)="startScan()" expand="block" fill="solid" shape="round">
     ESCANEAR
   </ion-button>
